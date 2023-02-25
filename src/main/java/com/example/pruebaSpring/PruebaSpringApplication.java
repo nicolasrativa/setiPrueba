@@ -21,6 +21,8 @@ public class PruebaSpringApplication {
 
 
 		int idmodulo = 1;
+		
+		/*-------------------------------CONECTARSE A LA BASES DE DATOS CON CREDENCIALES----------------------------------*/
 
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		String connectionUrl ="jdbc:sqlserver://seti-tech-test.cyaguswpnoyv.us-east-1.rds.amazonaws.com:1433;databasename=setitechtest;user=dev67281;password=D3vS3t12023$;";
@@ -28,7 +30,7 @@ public class PruebaSpringApplication {
 		System.out.println("Nos conectamos");
 
 		/*--------------------------------------------------------------------------------------------------------------------------------*/
-		System.out.println("---------- array ---------------"); /*MUESTRA TODOS LOS ID PROJECT DEl PRIMER BROKER*/
+		System.out.println("---------- array ---------------"); 
 
 		ArrayList<ArrayList<Integer>> outer = new ArrayList<ArrayList<Integer>>();
 
@@ -39,7 +41,7 @@ public class PruebaSpringApplication {
 
 		ResultSet rp = sts.executeQuery();
 
-		/*CREAMOS EL ARRAY QUE CONTIENE LOS PROJECT ID DEL BROKER 1 */
+		/*-------------CREAMOS EL ARRAY QUE CONTIENE LOS PROJECT ID DEL BROKER 1 -------------*/
 		while (rp.next()) {
 			ArrayList<Integer> inner = new ArrayList<Integer>();
 			inner.add(rp.getInt("ProjectId"));
@@ -138,11 +140,11 @@ public class PruebaSpringApplication {
 
 			PreparedStatement st = con.prepareStatement(
 					"SELECT *\n" +
-							"FROM Period \n" +
-							"INNER JOIN DiscountRate\n" +
-							"ON Period.PeriodId = DiscountRate.PeriodId\n" +
-							"INNER JOIN ProjectMovement\n" +
-							"ON Period.PeriodId = ProjectMovement.PeriodId WHERE ProjectId = '"+ i +"'\n"
+					"FROM Period \n" +
+					"INNER JOIN DiscountRate\n" +
+					"ON Period.PeriodId = DiscountRate.PeriodId\n" +
+					"INNER JOIN ProjectMovement\n" +
+					"ON Period.PeriodId = ProjectMovement.PeriodId WHERE ProjectId = '"+ i +"'\n"
 			);
 			ResultSet rm = st.executeQuery();
 
@@ -168,8 +170,6 @@ public class PruebaSpringApplication {
 
 			rm.close();
 			st.close();
-
-
 
 		}
 	}
